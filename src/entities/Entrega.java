@@ -10,14 +10,18 @@ public class Entrega {
     private Entregador entregador;
     private Pedido pedido;
 
+
     public Entrega(){}
 
-    public Entrega(Integer id,LocalDateTime data,String endereco, Entregador entregador,Pedido pedido){
+    public Entrega(Integer id,String endereco, Entregador entregador,Pedido pedido){
+        if (endereco == null || entregador == null || pedido == null){
+            throw new IllegalArgumentException("Valor não pode ser nulo!");
+        }
         this.id = id;
-        this.data = data;
         this.endereco = endereco;
         this.entregador = entregador;
         this.pedido = pedido;
+        data = LocalDateTime.now();
     }
 
 
@@ -29,32 +33,29 @@ public class Entrega {
         return data;
     }
 
-    public void setData(LocalDateTime data){
-        this.data = data;
-    }
-
     public String getEndereco(){
         return endereco;
     }
-
     public void setEndereco(String endereco){
+        if (endereco == null){
+            throw new IllegalArgumentException("Valor não pode ser nulo!");
+        }
         this.endereco = endereco;
     }
 
-    public Entregador getEntregador(){
+    public Entregador getEntregador() {
         return entregador;
     }
 
     public void setEntregador(Entregador entregador){
+        if (entregador == null){
+            throw new IllegalArgumentException("Valor não pode ser nulo!");
+        }
         this.entregador = entregador;
     }
 
     public Pedido getPedido(){
         return pedido;
-    }
-
-    public void setPedido(Pedido pedido){
-        this.pedido = pedido;
     }
 
 }

@@ -7,28 +7,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pedido {
-    private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     private Integer id;
     private LocalDateTime data;
     private StatusPedido statusPedido;
     private List<ItemPedido> itensPedidos = new ArrayList<>();
     private Cliente cliente;
-    private Pagamento pagamento;
-    private Entrega entrega;
+    private static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-    public Pedido(){}
+
 
     public Pedido(Integer id, StatusPedido statusPedido,Cliente cliente){
         this.id = id;
         this.statusPedido = statusPedido;
-        data = LocalDateTime.now();
         this.cliente = cliente;
+        data = LocalDateTime.now();
     }
 
     public Integer getId(){
         return id;
     }
 
+    public void setId(Integer id ){
+        this.id = id;
+    }
     public LocalDateTime getData(){
         return data;
     }
@@ -53,26 +54,19 @@ public class Pedido {
         this.cliente = cliente;
     }
 
-    public Pagamento getPagamento(){
-        return pagamento;
-    }
-
-    public void setPagamento(Pagamento pagamento){
-        this.pagamento = pagamento;
-    }
-
-    public Entrega getEntrega(){
-        return  entrega;
-    }
-
-    public void setEntrega(Entrega entrega){
-        this.entrega = entrega;
-    }
-    public void addItem(ItemPedido itemPedido){
+    public void addItem(ItemPedido itemPedido) {
+        if (itemPedido == null){
+            throw new IllegalArgumentException("Valor não pode ser nulo");
+        }
         itensPedidos.add(itemPedido);
     }
 
     public void removerItem(ItemPedido itemPedido){
+        if (itemPedido == null){
+            throw new IllegalArgumentException("Valor não pode ser nulo");
+        } else if (!itensPedidos.contains(itemPedido)){
+            throw new IllegalArgumentException("Valor Inserido Invalido, ItemPedido não contém na Lista.");
+        }
         itensPedidos.remove(itemPedido);
     }
 
@@ -94,9 +88,7 @@ public class Pedido {
             System.out.println(item);
         }
         sb.append("Cliente: " + cliente.getNome() + "\n");
-        sb.append(" Pagamento: " + pagamento.getTipoPagamento() + "\n");
         sb.append("Valor Total " + total());
-
         return sb.toString();
     }
 }

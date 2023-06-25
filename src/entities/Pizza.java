@@ -14,8 +14,10 @@ public class Pizza {
 
     public Pizza(){}
     public Pizza(Integer id, String sabor,Double preco, PizzaTamanho tamanho){
+        if (preco <= 0.0){
+            throw new IllegalArgumentException("Valor Invalido, Menor ou igual a zero!");
+        }
         this.id = id;
-
         this.sabor = sabor;
         this.preco = preco;
         this.tamanho = tamanho;
@@ -24,12 +26,18 @@ public class Pizza {
     public Integer getId(){
         return id;
     }
+    public void setId(Integer id){
+        this.id = id;
+    }
 
 
     public String getSabor(){
         return sabor;
     }
 
+    public void setSabor(String sabor){
+        this.sabor = sabor;
+    }
     public Double getPreco(){
         return preco;
     }
@@ -50,11 +58,18 @@ public class Pizza {
     }
 
     public void addIngrediente(Ingrediente ingrediente){
+        if (ingrediente == null){
+            throw new IllegalArgumentException("Valor inserido Invalido, (null)");
+        }
         ingredientes.add(ingrediente);
     }
 
     public void removeIngrediente(Ingrediente ingrediente){
+        if (ingrediente == null){
+            throw new IllegalArgumentException("Valor Inserido Invalido, (null)");
+        }else if (!ingredientes.contains(ingrediente)){
+            throw new IllegalArgumentException("Valor Inserido não existe na lista de ingredientes! ");
+        }
         ingredientes.remove(ingrediente);
     }
-
 }

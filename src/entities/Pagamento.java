@@ -9,23 +9,27 @@ public class Pagamento {
     private LocalDateTime dataHorario;
     private TipoPagamento tipoPagamento;
     private Double valor;
-    private Cliente cliente;
     private Pedido pedido;
 
-    public Pagamento(){}
-    public Pagamento(Integer id,TipoPagamento tipoPagamento, Cliente cliente, Pedido pedido){
+    public Pagamento(){
+        dataHorario = LocalDateTime.now();
+    }
+    public Pagamento(Integer id,TipoPagamento tipoPagamento,Pedido pedido){
         this.id = id;
         this.tipoPagamento = tipoPagamento;
-        this.valor = pedido.total();
-        this.cliente = cliente;
+        this.valor = valor;
         this.pedido = pedido;
         dataHorario = LocalDateTime.now();
+        this.valor = pedido.total();
     }
 
     public Integer getId(){
         return id;
     }
 
+    public void setId(Integer id){
+        this.id = id;
+    }
     public LocalDateTime getDataHorario(){
         return dataHorario;
     }
@@ -43,21 +47,14 @@ public class Pagamento {
     }
 
     public void setValor(Double valor){
+        if (valor <= 0.0){
+            throw new IllegalArgumentException("Valor Invalido, menor ou igual a zero!");
+        }
         this.valor = valor;
-    }
-    public Cliente getCliente(){
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente){
-        this.cliente = cliente;
     }
 
     public Pedido getPedido(){
         return pedido;
     }
 
-    public void setPedido(Pedido pedido){
-        this.pedido = pedido;
-    }
 }

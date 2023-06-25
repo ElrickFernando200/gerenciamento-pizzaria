@@ -1,5 +1,7 @@
 package entities;
 
+import exceptions.DataException;
+
 import java.time.LocalDate;
 
 public class Ingrediente {
@@ -11,6 +13,10 @@ public class Ingrediente {
 
     public Ingrediente(){}
     public Ingrediente(Integer id, String nome, LocalDate validade,Integer estoque){
+        if (validade.isBefore(LocalDate.now())){
+            throw new DataException("Data Invalida, anterior a data atual");
+        }
+
         this.id = id;
         this.nome = nome;
         this.validade = validade;
@@ -19,6 +25,9 @@ public class Ingrediente {
 
     public Integer getId(){
         return id;
+    }
+    public void setId(Integer id){
+        this.id = id;
     }
 
     public String getNome(){
@@ -34,6 +43,9 @@ public class Ingrediente {
     }
 
     public void setValidade(LocalDate validade){
+        if (validade.isBefore(LocalDate.now())){
+            throw new DataException("Validade precisar ser datas futuras!");
+        }
         this.validade = validade;
     }
 
@@ -42,9 +54,17 @@ public class Ingrediente {
     }
 
     public void addEstoque(int quantidade){
+        if (quantidade <= 0){
+            throw new IllegalArgumentException("Valor Invalido! Insira um valor maior que 0.");
+        }
         estoque += quantidade;
     }
     public void removerEstoque(int quantidade){
+        if (quantidade > estoque){
+            throw new IllegalArgumentException("Estoque insuficiente!");
+        } else if (quantidade <= 0){
+            throw new IllegalArgumentException("Valor Invalido! Insira um valor maior que 0.");
+        }
         estoque -= quantidade;
     }
 

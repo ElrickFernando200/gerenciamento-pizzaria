@@ -25,6 +25,9 @@ public class Entregador extends Usuario {
     }
 
     public void addEntrega(Entrega entrega){
+        if (entrega == null){
+            throw new IllegalArgumentException("Valor não pode ser nulo!");
+        }
         entregas.add(entrega);
     }
 

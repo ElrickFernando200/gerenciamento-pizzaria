@@ -22,6 +22,7 @@ public class Usuario {
     public Integer getId(){
         return id;
     }
+
     public String getNome(){
         return nome;
     }
