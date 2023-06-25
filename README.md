@@ -9,3 +9,9 @@
 <h1>Diagrama de Classes (UML) </h1>
 
 ![DiagramaGerenciamentoPizzaria (1)](https://github.com/ElrickFernando200/gerenciamento-pizzaria/assets/117322813/4db5f565-6b61-49e8-be19-7311ef8634ce)
+
+
+<h1>Diagrama de Objetos (Uml) </h1>
+<h2> Como os objetos estão se comportando em Memória</h2>
+
+![diagramadeobjetosgerenciamento-pizarria](https://github.com/ElrickFernando200/gerenciamento-pizzaria/assets/117322813/2dadfac7-baa7-450b-b063-baea87f93f72)
